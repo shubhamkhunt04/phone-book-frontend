@@ -24,7 +24,7 @@ const Contacts = () => {
       dispatch({ type: 'SET_CONTACTS', payload });
     };
     getContacts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

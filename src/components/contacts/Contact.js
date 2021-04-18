@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Avatar from 'react-avatar';
 import { AiTwotoneDelete, FaEdit } from 'react-icons/all';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../AppContext';
+import api from '../../common/api';
 
 const Contact = ({ _id, name, email, phone, selectAll }) => {
-  // const dispatch = useDispatch();
+  const { state, dispatch } = useContext(AppContext);
+
+  const deleteBtnHandler = async () => {
+    await api.delete(`/contact/${_id}`);
+    // delete contact from context
+    const newContacts = state.contacts.filter((contact) => contact._id !== _id);
+    dispatch({ type: 'SET_CONTACTS', payload: newContacts });
+  };
 
   return (
     <tr>
@@ -33,7 +42,7 @@ const Contact = ({ _id, name, email, phone, selectAll }) => {
           <AiTwotoneDelete
             size='30px'
             className='text-danger'
-            // onClick={() => dispatch(deleteContact(id))}
+            onClick={deleteBtnHandler}
           />
         </span>
       </td>
