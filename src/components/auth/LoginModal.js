@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../AppContext';
+import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
 
 const LoginModal = () => {
@@ -14,14 +15,13 @@ const LoginModal = () => {
 
   const history = useHistory();
 
-  
-  const { getToken } = useContext(AppContext);
-  const idToken = getToken() 
+  const { initializeAuth, getToken } = useContext(AppContext);
+  const idToken = getToken();
   useEffect(() => {
     if (idToken) {
-      history.push(ROUTES.MAIN);
+      history.push(ROUTES.CONTACTS);
     } else {
-      history.push(ROUTES.LOGIN);
+      history.push(ROUTES.MAIN);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,19 +38,24 @@ const LoginModal = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // dispatch(login(loginData));
+    const res = await api.post('/user/login', loginData);
+    const { payload = {} } = res?.data;
+    const { token = '' } = payload;
+    if (token) {
+      initializeAuth(token, payload);
+    }
     setLoginData({
       email: '',
       password: '',
     });
     setLoading(false);
     handleClose();
-    history.push(ROUTES.CONTATCTS);
+    history.push(ROUTES.CONTACTS);
   };
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow} className='mr-4'>
+      <Button variant='danger' onClick={handleShow} className='mr-4'>
         LOGIN
       </Button>
 

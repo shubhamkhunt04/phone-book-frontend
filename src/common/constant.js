@@ -2,8 +2,8 @@
 export const ROUTES = {
   MAIN: '/',
   LOGOUT: '/logout',
-  LOGIN: '/login',
-  CONTATCS:'/contacts'
+  CONTACTS:'/contacts',
+  ADDCONTACT:'/contact/addcontact'
 };
 
 

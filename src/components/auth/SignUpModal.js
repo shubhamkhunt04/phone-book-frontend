@@ -14,7 +14,7 @@ const SignUpModal = () => {
     password: '',
   });
 
-  const {initializeAuth} = useContext(AppContext)
+  const { initializeAuth } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -30,12 +30,12 @@ const SignUpModal = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-     const res =await  api.post('/user/register',registerData)
-     const {payload = {}} = res?.data
-     const {token = ""} = payload
-     if(token){
-      initializeAuth(token,payload)
-     }
+    const res = await api.post('/user/register', registerData);
+    const { payload = {} } = res?.data;
+    const { token = '' } = payload;
+    if (token) {
+      initializeAuth(token, payload);
+    }
     setRegisterData({
       username: '',
       email: '',
@@ -43,7 +43,7 @@ const SignUpModal = () => {
     });
     setLoading(false);
     handleClose();
-    history.push(ROUTES.CONTATCTS);
+    history.push(ROUTES.CONTACTS);
   };
 
   return (

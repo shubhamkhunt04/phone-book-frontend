@@ -51,8 +51,7 @@ const AppContextProvider = ({ children }) => {
   };
 
   const initializeAuth = (authToken) => {
-    console.log(authToken);
-    const token = authToken || getToken();
+      const token = authToken || getToken();
     if (token) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       const userData = jwtDecode(token);
