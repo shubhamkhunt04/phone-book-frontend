@@ -17,11 +17,11 @@ const Navbar = () => {
 
   const idToken = getToken();
   useEffect(() => {
-    if (idToken) {
-      history.push(ROUTES.CONTACTS);
-    } else {
-      history.push(ROUTES.MAIN);
-    }
+    // if (idToken) {
+    //   history.push(ROUTES.CONTACTS);
+    // } else {
+    //   history.push(ROUTES.MAIN);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,12 +33,12 @@ const Navbar = () => {
         </Link>
         {idToken ? (
           <div>
-            <Button
+            {/* <Button
               className='btn btn-light ml-auto'
               onClick={() => history.push(ROUTES.ADDCONTACT)}
             >
               Create Contact
-            </Button>
+            </Button> */}
             <Button
               href='#'
               className='btn btn-light ml-4'
