@@ -7,16 +7,16 @@ import store from './store';
 const  App=()=> {
   return (
     <Provider store={store}>
-      <div className='App'>
-        <header className='App-header'>
+      {/* <div className='App'> */}
+        {/* <header className='App-header'> */}
           <Navbar />
           <div className='container'>
             <div className='py-3'>
               <Contacts />
             </div>
           </div>
-        </header>
-      </div>
+        {/* </header> */}
+      {/* </div> */}
     </Provider>
   );
 }
