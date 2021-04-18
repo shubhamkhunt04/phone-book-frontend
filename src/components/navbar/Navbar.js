@@ -1,18 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { AppContext } from '../../AppContext';
 import { ROUTES } from '../../common/constant';
 import SignUpModal from '../auth/SignUpModal';
 const Navbar = () => {
-  const { dispatch, isAuthenticated } = useContext(AppContext);
+  const { dispatch, isAuthenticated,getToken } = useContext(AppContext);
   const history = useHistory();
 
-  
+
   const logoutBtnHandler = () => {
     dispatch({ type: 'LOGOUT' });
     history.push(ROUTES.MAIN);
-  };
+  }
+
+  const idToken = getToken() 
+  useEffect(() => {
+    if (idToken) {
+      history.push(ROUTES.CONTATCS);
+    } else {
+      history.push(ROUTES.MAIN);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <nav className='navbar shadow fixed-top navbar-expand-sm navbar-dark bg-primary'>

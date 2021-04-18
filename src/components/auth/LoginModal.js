@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { AppContext } from '../../AppContext';
 import { ROUTES } from '../../common/constant';
 
 const LoginModal = () => {
@@ -12,6 +13,18 @@ const LoginModal = () => {
   });
 
   const history = useHistory();
+
+  
+  const { getToken } = useContext(AppContext);
+  const idToken = getToken() 
+  useEffect(() => {
+    if (idToken) {
+      history.push(ROUTES.MAIN);
+    } else {
+      history.push(ROUTES.LOGIN);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onChange = (e) => {
     e.preventDefault();
