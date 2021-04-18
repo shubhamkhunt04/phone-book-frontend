@@ -9,21 +9,22 @@ import Contact from './Contact';
 const Contacts = () => {
   const history = useHistory();
 
-  const { state, dispatch,getToken } = useContext(AppContext);
+  const { state, dispatch, getToken } = useContext(AppContext);
   const { contacts } = state;
 
   useEffect(() => {
     const config = {
       headers: {
-        Authorization: "Bearer " + getToken()
-     }
-    }
+        Authorization: 'Bearer ' + getToken(),
+      },
+    };
     const getContacts = async () => {
-      const res = await api.get('/contact/contacts',config);
-      const { results:payload } = res?.data;
+      const res = await api.get('/contact/contacts', config);
+      const { results: payload } = res?.data;
       dispatch({ type: 'SET_CONTACTS', payload });
     };
     getContacts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

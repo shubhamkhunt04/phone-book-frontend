@@ -3,7 +3,7 @@ import Avatar from 'react-avatar';
 import { AiTwotoneDelete, FaEdit } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 
-const Contact = ({ id, name, email, phone, selectAll }) => {
+const Contact = ({ _id, name, email, phone, selectAll }) => {
   // const dispatch = useDispatch();
 
   return (
@@ -26,7 +26,7 @@ const Contact = ({ id, name, email, phone, selectAll }) => {
       <td>{email}</td>
       <td>{phone}</td>
       <td className='actions'>
-        <Link to={`/contacts/edit/${id}`}>
+        <Link to={`/contacts/edit/${_id}`}>
           <FaEdit size='30px' className='mr-4 text-warning' />
         </Link>
         <span>

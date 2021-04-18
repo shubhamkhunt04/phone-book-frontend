@@ -3,7 +3,7 @@ import Contacts from './components/contacts/Contacts';
 import './styles/app.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AddContact from './components/contacts/AddContact';
-// import EditContact from './components/contacts/EditContact';
+import EditContact from './components/contacts/EditContact';
 import Landing from './components/auth/Landing';
 import { useContext, useEffect } from 'react';
 import { AppContext } from './AppContext';
@@ -28,7 +28,7 @@ const App = () => {
         <Route exact path='/' component={Landing} />
         <Route exact path='/contacts' component={Contacts} />
         <Route exact path='/contact/addcontact' component={AddContact} />
-        {/* <Route exact path='/contacts/edit/:id' component={EditContact} /> */}
+        <Route exact path='/contacts/edit/:id' component={EditContact} />
       </Switch>
       {/* </div>
             </div>
