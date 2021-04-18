@@ -20,6 +20,15 @@ const reducer = (state, action) => {
       return { ...state, authToken: payload };
     case 'SET_CONTACTS':
       return { ...state, contacts: payload || [] };
+    case 'LOGOUT':
+      delete api.defaults.headers.common.Authorization;
+      localStorage.removeItem(TOKEN);
+      return {
+        ...initialState,
+        authenticated: false,
+        authToken: null,
+        user: null,
+      };
     default:
       return { ...state };
   }
@@ -42,11 +51,11 @@ const AppContextProvider = ({ children }) => {
   };
 
   const initializeAuth = (authToken) => {
-      console.log(authToken)
+    console.log(authToken);
     const token = authToken || getToken();
     if (token) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
-        const userData = jwtDecode(token);
+      const userData = jwtDecode(token);
       dispatch({ type: 'SET_TOKEN', payload: token });
       dispatch({ type: 'SET_AUTHENTICATED', payload: true });
       dispatch({ type: 'SET_CURRENT_USER', payload: userData });

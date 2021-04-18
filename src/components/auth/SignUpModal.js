@@ -48,7 +48,7 @@ const SignUpModal = () => {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow} className='mr-4'>
+      <Button variant='warning' onClick={handleShow} className='mr-4'>
         SIGN UP
       </Button>
 
