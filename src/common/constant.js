@@ -3,10 +3,7 @@ export const ROUTES = {
   MAIN: '/',
   LOGOUT: '/logout',
   LOGIN: '/login',
-  VERIFYUSER: '/verifyuser',
-  ALL_UPLOADED_APPS: '/allapps',
-  UPLOAD_APP: '/upload',
-  DOWNLOAD_APP: '/install/:appId'
+  CONTATCS:'/contacts'
 };
 
 

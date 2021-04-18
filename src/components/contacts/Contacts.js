@@ -1,10 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Contact from './Contact';
 
 const Contacts = () => {
-  const contacts = useSelector((state) => state.contacts);
-  console.log(contacts);
+
   return (
     <div>
       <table className='table shadow'>
@@ -26,7 +24,7 @@ const Contacts = () => {
           </tr>
         </thead>
         <tbody>
-          {contacts.map((contact) =><Contact {...contact} key={contact.id} />)}
+          {/* {contacts.map((contact) =><Contact {...contact} key={contact.id} />)} */}
         </tbody>
       </table>
     </div>

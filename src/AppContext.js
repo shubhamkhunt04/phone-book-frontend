@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import { useReducer, createContext } from 'react';
 import api from './common/api';
 import { TOKEN } from './common/constant';
@@ -40,14 +41,15 @@ const AppContextProvider = ({ children }) => {
     return state.authenticated;
   };
 
-  const initializeAuth = (authToken, userData) => {
+  const initializeAuth = (authToken) => {
+      console.log(authToken)
     const token = authToken || getToken();
     if (token) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      //   const userData = jwtDecode(token);
-      dispatch({ type: 'SET_TOKEN', data: token });
-      dispatch({ type: 'SET_AUTHENTICATED', data: true });
-      dispatch({ type: 'SET_CURRENT_USER', data: userData });
+        const userData = jwtDecode(token);
+      dispatch({ type: 'SET_TOKEN', payload: token });
+      dispatch({ type: 'SET_AUTHENTICATED', payload: true });
+      dispatch({ type: 'SET_CURRENT_USER', payload: userData });
     }
   };
 

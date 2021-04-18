@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { AppContext } from '../../AppContext';
+import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
 
 const SignUpModal = () => {
@@ -13,7 +14,7 @@ const SignUpModal = () => {
     password: '',
   });
 
-  const dispatch = useDispatch();
+  const {initializeAuth} = useContext(AppContext)
 
   const history = useHistory();
 
@@ -29,7 +30,12 @@ const SignUpModal = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // dispatch(register(registerData));
+     const res =await  api.post('/user/register',registerData)
+     const {payload = {}} = res?.data
+     const {token = ""} = payload
+     if(token){
+      initializeAuth(token,payload)
+     }
     setRegisterData({
       username: '',
       email: '',

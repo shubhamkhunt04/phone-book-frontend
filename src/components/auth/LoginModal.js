@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { ROUTES } from '../../common/constant';
 
@@ -11,8 +10,6 @@ const LoginModal = () => {
     email: '',
     password: '',
   });
-
-  const dispatch = useDispatch();
 
   const history = useHistory();
 
