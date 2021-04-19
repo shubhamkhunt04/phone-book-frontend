@@ -32,14 +32,14 @@ const Contacts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const selectMenuHandler = async (e) => {
+  const selectMenuHandler = (e) => {
     // sort contacts by order
     const order = e.target.value || 'asc';
 
     getContacts(`/contact/contacts?sort=name:${order}`);
   };
 
-  const searchHandler = async (e) => {
+  const searchHandler = (e) => {
     // filtering the results
     const result = contacts.filter((contact) =>
       contact.name.includes(e.target.value)
@@ -49,6 +49,13 @@ const Contacts = () => {
     // if search box empty then fetch all contacts
     if (e.target.value.length === 0) {
       getContacts('/contact/contacts');
+    }
+  };
+
+  const showPerPageHandler = async (e) => {
+    const limit = e.target.value;
+    if (limit) {
+      getContacts(`/contact/contacts?limit=${limit}`);
     }
   };
 
@@ -98,6 +105,27 @@ const Contacts = () => {
           {contacts?.map((contact) => (
             <Contact {...contact} key={contact.id} />
           ))}
+          <tr>
+            <th scope='col'></th>
+            <th scope='col'></th>
+            <th scope='col'>
+              <p className='float-right'>Row per page</p>
+            </th>
+            <td>
+              <select
+                class='form-select form-select-md'
+                aria-label='Default select example'
+                className='w-auto'
+                onChange={showPerPageHandler}
+                title='Sort Contact number'
+              >
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+              </select>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
