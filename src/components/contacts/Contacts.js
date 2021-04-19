@@ -94,7 +94,7 @@ const Contacts = () => {
           className='btn btn-light float-right mb-2'
           onClick={() => history.push(ROUTES.ADDCONTACT)}
         >
-          Create Contact
+         + Add Contact
         </Button>
       </div>
 

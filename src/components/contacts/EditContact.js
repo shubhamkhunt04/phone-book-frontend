@@ -47,8 +47,8 @@ const EditContact = () => {
   }, [id]);
 
   return (
-    <div className='container'>
-      <div className='card border-0 shadow'>
+    <div className='container mt-5 w-75'>
+      <div className='card border-0 shadow bg-primary text-white'>
         <div className='card-header'>
           <h1>Edit Contact</h1>
         </div>

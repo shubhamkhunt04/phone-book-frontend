@@ -7,7 +7,7 @@ import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
 
 const AddContact = () => {
-  const {state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -44,8 +44,11 @@ const AddContact = () => {
   };
 
   return (
-    <div className='container'>
-      <div className='card border-0 shadow' onSubmit={onSubmit}>
+    <div className='container mt-5 w-75'>
+      <div
+        className='card border-0 shadow bg-primary text-white'
+        onSubmit={onSubmit}
+      >
         <div className='card-header'>
           <h1>Add Contact</h1>
         </div>
@@ -84,7 +87,7 @@ const AddContact = () => {
                 required
               />
             </div>
-            <button className='btn btn-primary m-3' type='submit'>
+            <button className='btn btn-info m-3' type='submit'>
               Add Contact
             </button>
           </form>
