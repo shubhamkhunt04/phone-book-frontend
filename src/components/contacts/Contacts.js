@@ -83,7 +83,7 @@ const Contacts = () => {
               className='search-input'
               type='text'
               name='search'
-              placeholder='Search...'
+              placeholder='Search your contact name ...'
               onChange={searchHandler}
             />
             <BiSearch size='25px' className='search-icon' />
@@ -94,7 +94,7 @@ const Contacts = () => {
           className='btn btn-light float-right mb-2'
           onClick={() => history.push(ROUTES.ADDCONTACT)}
         >
-         + Add Contact
+          + Add Contact
         </Button>
       </div>
 
@@ -119,10 +119,11 @@ const Contacts = () => {
           </tr>
         </thead>
         <tbody>
-          {contacts.length &&
-            contacts.map((contact, index) => (
-              <Contact {...contact} key={contact.id} index={index + 1} />
-            ))}
+          {contacts.length
+            ? contacts.map((contact, index) => (
+                <Contact {...contact} key={contact.id} index={index + 1} />
+              ))
+            : null}
           {/* <tr>
             <th scope='col'></th>
             <th scope='col'></th>
@@ -146,6 +147,11 @@ const Contacts = () => {
           </tr> */}
         </tbody>
       </table>
+      {contacts.length === 0 && (
+        <tr className='text-white'>
+          <h2>No contacts available yet !! please add contacts</h2>
+        </tr>
+      )}
     </div>
   );
 };

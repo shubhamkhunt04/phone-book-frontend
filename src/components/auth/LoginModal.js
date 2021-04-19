@@ -60,6 +60,7 @@ const LoginModal = () => {
         toast.error(message);
       }
     } catch (err) {
+      toast.error(err.message);
       console.log(err);
     }
   };

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
@@ -24,23 +25,32 @@ const AddContact = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const res = await api.post('/contact/addcontact', contactData);
-    const { payload = {} } = res?.data;
-    dispatch({ type: 'SET_CONTACTS', payload });
-    // const { token = '' } = payload;
-    // if (token) {
-    //   initializeAuth(token, payload);
-    // }
-    console.log('res', res.data);
+    try {
+      const res = await api.post('/contact/addcontact', contactData);
+      const { payload = {}, status, message } = res?.data;
+      dispatch({ type: 'SET_CONTACTS', payload });
+      // const { token = '' } = payload;
+      // if (token) {
+      //   initializeAuth(token, payload);
+      // }
+      console.log('res', res.data);
 
-    // dispatch(addContact({ id: nanoid(8), ...contactData }));
+      // dispatch(addContact({ id: nanoid(8), ...contactData }));
 
-    setContactData({
-      name: '',
-      phone: '',
-      email: '',
-    });
-    history.push(ROUTES.CONTACTS);
+      setContactData({
+        name: '',
+        phone: '',
+        email: '',
+      });
+      if (status === 200) {
+        toast.success(message);
+        history.push(ROUTES.CONTACTS);
+      } else {
+        toast.error(message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

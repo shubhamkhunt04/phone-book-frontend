@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
+import { toast } from 'react-toastify';
 import api from '../../common/api';
+import { ROUTES } from '../../common/constant';
 
 const EditContact = () => {
   const history = useHistory();
@@ -19,15 +21,25 @@ const EditContact = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    await api.put(`/contact/${id}`, contactData);
-    console.log(contactData)
-    setContactData({
-      name: '',
-      phone: '',
-      email: '',
-    });
-    history.push('/');
+    try {
+      const res = await api.put(`/contact/${id}`, contactData);
+      const { status, message } = res?.data;
+      console.log(contactData);
+      setContactData({
+        name: '',
+        phone: '',
+        email: '',
+      });
+      if (status === 200) {
+        toast.success(message);
+        history.push(ROUTES.MAIN);
+      } else {
+        toast.error(message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+      console.log(err);
+    }
   };
 
   useEffect(() => {
