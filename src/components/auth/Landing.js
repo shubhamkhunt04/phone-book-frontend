@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
+import Loader from '../loader/Loader';
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) return <Redirect to='/dashboard' />;
@@ -19,6 +20,7 @@ const Landing = ({ isAuthenticated }) => {
         </div>
       </div>
     </section>
+    // <Loader loaderClass="white-loader"/>
   );
 };
 

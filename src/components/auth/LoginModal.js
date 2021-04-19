@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
+import Loader from '../loader/Loader';
 
 const LoginModal = () => {
   const [show, setShow] = useState(false);
@@ -59,14 +60,16 @@ const LoginModal = () => {
         LOGIN
       </Button>
 
-      <Modal size='md' show={show} onHide={handleClose}>
+      <Modal size='md' show={show} onHide={handleClose} className='mt-5'>
         <Modal.Header closeButton>
           <Modal.Title>LOGIN</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           {loading ? (
-            <h1>Loading</h1>
+            <div className='d-flex justify-content-center align-items-center mt-4 minH-215'>
+              <Loader loaderClass='black-loader' />
+            </div>
           ) : (
             <form onSubmit={onSubmit}>
               <div className='form-group m-3'>

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
+import Loader from '../loader/Loader';
 
 const SignUpModal = () => {
   const [show, setShow] = useState(false);
@@ -48,18 +49,20 @@ const SignUpModal = () => {
 
   return (
     <>
-      <Button variant='warning' onClick={handleShow} className='mr-4'>
+      <Button variant='secondary' onClick={handleShow} className='mr-4'>
         SIGN UP
       </Button>
 
-      <Modal size='md' show={show} onHide={handleClose}>
+      <Modal size='md' show={show} onHide={handleClose} className='mt-5'>
         <Modal.Header closeButton>
           <Modal.Title>SIGN UP</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          {loading ? (
-            <h1>Loading</h1>
+        <Modal.Body className='bg-black'>
+          {!loading ? (
+            <div className='d-flex justify-content-center align-items-center mt-4 minH-310'>
+              <Loader loaderClass='black-loader' />
+            </div>
           ) : (
             <form onSubmit={onSubmit}>
               <div className='form-group m-3'>
@@ -103,7 +106,7 @@ const SignUpModal = () => {
                 />
               </div>
 
-              <Button variant='primary' className='m-3' type='submit'>
+              <Button variant='success' className='m-3' type='submit'>
                 Sign Up
               </Button>
               <Button variant='secondary' onClick={handleClose}>
