@@ -4,7 +4,9 @@ $theme-colors: ("primary": #1A1D24,
     "secondary":#100A61,
     "danger": #F95B34,
     "warning":#FFCA2C,
-    "success":#157347
+    "success":#157347,
+    "info":#90CAF9,
+    "light":#353b48
     );
 
 @import "node_modules/bootstrap/scss/bootstrap";

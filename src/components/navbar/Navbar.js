@@ -41,7 +41,7 @@ const Navbar = () => {
             </Button> */}
             <Button
               href='#'
-              className='btn btn-light ml-4'
+              className='btn btn-warning ml-4'
               onClick={logoutBtnHandler}
             >
               Logout
