@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
@@ -39,19 +40,28 @@ const LoginModal = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await api.post('/user/login', loginData);
-    const { payload = {} } = res?.data;
-    const { token = '' } = payload;
-    if (token) {
-      initializeAuth(token, payload);
+    try {
+      const res = await api.post('/user/login', loginData);
+      const { payload = {}, status, message } = res?.data;
+      const { token = '' } = payload;
+      if (token) {
+        initializeAuth(token, payload);
+      }
+      setLoginData({
+        email: '',
+        password: '',
+      });
+      setLoading(false);
+      handleClose();
+      if (status === 200) {
+        toast.success(message);
+        history.push(ROUTES.CONTACTS);
+      } else {
+        toast.error(message);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    setLoginData({
-      email: '',
-      password: '',
-    });
-    setLoading(false);
-    handleClose();
-    history.push(ROUTES.CONTACTS);
   };
 
   return (

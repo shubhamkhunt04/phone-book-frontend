@@ -7,6 +7,8 @@ import EditContact from './components/contacts/EditContact';
 import Landing from './components/auth/Landing';
 import { useContext, useEffect } from 'react';
 import { AppContext } from './AppContext';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const { initializeAuth } = useContext(AppContext);
@@ -14,11 +16,12 @@ const App = () => {
   useEffect(() => {
     // for refreshing page
     initializeAuth();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Router>
+        <ToastContainer />
       {/* <div className='App'>
           <header className='App-header'> */}
       <Navbar />

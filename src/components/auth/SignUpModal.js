@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
@@ -31,20 +32,30 @@ const SignUpModal = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const res = await api.post('/user/register', registerData);
-    const { payload = {} } = res?.data;
-    const { token = '' } = payload;
-    if (token) {
-      initializeAuth(token, payload);
+    try {
+      const res = await api.post('/user/register', registerData);
+      const { payload = {}, status, message } = res?.data;
+      const { token = '' } = payload;
+      if (token) {
+        initializeAuth(token, payload);
+      }
+      setRegisterData({
+        username: '',
+        email: '',
+        password: '',
+      });
+      setLoading(false);
+      handleClose();
+
+      if (status === 200) {
+        toast.success(message);
+        history.push(ROUTES.CONTACTS);
+      } else {
+        toast.error(message);
+      }
+    } catch (err) {
+      console.log(err);
     }
-    setRegisterData({
-      username: '',
-      email: '',
-      password: '',
-    });
-    setLoading(false);
-    handleClose();
-    history.push(ROUTES.CONTACTS);
   };
 
   return (
@@ -59,7 +70,7 @@ const SignUpModal = () => {
         </Modal.Header>
 
         <Modal.Body className='bg-black'>
-          {!loading ? (
+          {loading ? (
             <div className='d-flex justify-content-center align-items-center mt-4 minH-310'>
               <Loader loaderClass='black-loader' />
             </div>
