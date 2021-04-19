@@ -10,52 +10,45 @@ const Contacts = () => {
   const history = useHistory();
 
   const { state, dispatch, getToken } = useContext(AppContext);
-  const { contacts } = state;
+  const { contacts = [] } = state;
 
-  useEffect(() => {
+  // fetch contacts from server
+  const getContacts = async (url) => {
     const config = {
       headers: {
         Authorization: 'Bearer ' + getToken(),
       },
     };
-    const getContacts = async () => {
-      const res = await api.get('/contact/contacts', config);
-      const { results: payload } = res?.data;
-      dispatch({ type: 'SET_CONTACTS', payload });
-    };
-    getContacts();
+
+    const res = await api.get(url, config);
+    const { results: payload = {} } = res?.data;
+
+    dispatch({ type: 'SET_CONTACTS', payload });
+  };
+
+  useEffect(() => {
+    // load all contacts when component is mounted
+    getContacts('/contact/contacts');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const selectMenuHandler = async (e) => {
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + getToken(),
-      },
-    };
-    const order = e.target.value;
-    const res = await api.get(`/contact/contacts?sort=name:${order}`, config);
-    const { results: payload } = res?.data;
-    console.log(payload);
-    dispatch({ type: 'SET_CONTACTS', payload });
+    // sort contacts by order
+    const order = e.target.value || 'asc';
+
+    getContacts(`/contact/contacts?sort=name:${order}`);
   };
 
   const searchHandler = async (e) => {
-    console.log(e.target.value);
+    // filtering the results
     const result = contacts.filter((contact) =>
       contact.name.includes(e.target.value)
     );
-    console.log('result', result);
     dispatch({ type: 'SET_CONTACTS', payload: result });
-    const config = {
-      headers: {
-        Authorization: 'Bearer ' + getToken(),
-      },
-    };
+
+    // if search box empty then fetch all contacts
     if (e.target.value.length === 0) {
-      const res = await api.get('/contact/contacts', config);
-      const { results: payload } = res?.data;
-      dispatch({ type: 'SET_CONTACTS', payload });
+      getContacts('/contact/contacts');
     }
   };
 
