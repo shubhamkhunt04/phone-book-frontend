@@ -21,7 +21,7 @@ const EditContact = () => {
     e.preventDefault();
 
     await api.put(`/contact/${id}`, contactData);
-
+    console.log(contactData)
     setContactData({
       name: '',
       phone: '',
@@ -34,7 +34,7 @@ const EditContact = () => {
     const getContactById = async () => {
       const res = await api.get(`contact/${id}`);
       const { payload = {} } = res?.data;
-      console.log(payload);
+      console.log(res.data);
       const { name, email, phone } = payload;
       setContactData({
         name,

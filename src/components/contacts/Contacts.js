@@ -21,7 +21,9 @@ const Contacts = () => {
     };
 
     const res = await api.get(url, config);
-    const { results: payload = {} } = res?.data;
+    console.log(res.data)
+    // const { results: payload = {} } = res?.data;
+    const { payload = {} } = res?.data;
 
     dispatch({ type: 'SET_CONTACTS', payload });
   };
@@ -64,7 +66,7 @@ const Contacts = () => {
       <div>
         <input type='text' name='search' onChange={searchHandler} />
         <select
-          class='form-select form-select-md'
+          className='form-select form-select-md'
           aria-label='Default select example'
           className='w-auto'
           onChange={selectMenuHandler}
@@ -102,9 +104,10 @@ const Contacts = () => {
           </tr>
         </thead>
         <tbody>
-          {contacts?.map((contact) => (
-            <Contact {...contact} key={contact.id} />
-          ))}
+          {contacts.length &&
+            contacts.map((contact, index) => (
+              <Contact {...contact} key={contact.id} index={index + 1} />
+            ))}
           <tr>
             <th scope='col'></th>
             <th scope='col'></th>
@@ -113,9 +116,8 @@ const Contacts = () => {
             </th>
             <td>
               <select
-                class='form-select form-select-md'
+                className='form-select form-select-md w-aut0'
                 aria-label='Default select example'
-                className='w-auto'
                 onChange={showPerPageHandler}
                 title='Sort Contact number'
               >

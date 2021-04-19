@@ -6,6 +6,7 @@ import { TOKEN } from './common/constant';
 const initialState = {
   currentUser: null,
   authToken: localStorage.getItem(TOKEN),
+  selectedContacts:[]
 };
 
 const reducer = (state, action) => {
@@ -19,7 +20,13 @@ const reducer = (state, action) => {
       localStorage.setItem(TOKEN, payload);
       return { ...state, authToken: payload };
     case 'SET_CONTACTS':
-      return { ...state, contacts: payload || [] };
+      return { ...state, contacts: payload ? payload : [] };
+    case 'SET_SELECTED_CONTACTS':
+      console.log(payload);
+      return {
+        ...state,
+        selectedContacts: [],
+      };
     case 'LOGOUT':
       delete api.defaults.headers.common.Authorization;
       localStorage.removeItem(TOKEN);
@@ -51,7 +58,7 @@ const AppContextProvider = ({ children }) => {
   };
 
   const initializeAuth = (authToken) => {
-      const token = authToken || getToken();
+    const token = authToken || getToken();
     if (token) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`;
       const userData = jwtDecode(token);
