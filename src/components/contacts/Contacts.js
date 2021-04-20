@@ -22,7 +22,6 @@ const Contacts = () => {
     };
 
     const res = await api.get(url, config);
-    console.log(res.data);
     // const { results: payload = {} } = res?.data;
     const { payload = {} } = res?.data;
 
@@ -98,7 +97,7 @@ const Contacts = () => {
         </Button>
       </div>
 
-      <table className='table shadow bg-primary text-white text-center mt-5'>
+      <table className='table shadow text-white text-center mt-5'>
         <thead>
           <tr>
             <th scope='col'>

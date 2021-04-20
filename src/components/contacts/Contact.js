@@ -40,18 +40,18 @@ const Contact = ({ _id, name, email, phone, index }) => {
     <tr>
       <th className='pt-3'>{index}.</th>
       <td>
-        <Avatar className='mr-2' name={name} size='40' round={true} />
-        {name}
+        <Avatar className='float-left' name={name} size='40' round={true} />
+        <div className='pt-2'>{name}</div>
       </td>
       <td className='pt-3'>{email}</td>
       <td className='pt-3'>{phone}</td>
       <td>
         <Link to={`/contacts/edit/${_id}`}>
-          <Button className='info'>
+          <Button className='bg-dark border-0'>
             <FaRegEdit size='30px' className='text-info' />
           </Button>
         </Link>
-        <Button>
+        <Button className='bg-dark border-0'>
           <AiOutlineDelete
             size='30px'
             className='text-danger'
