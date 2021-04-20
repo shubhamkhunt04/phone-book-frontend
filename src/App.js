@@ -9,7 +9,7 @@ import { AppContext } from './AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Footer from './components/footer/Footer';
-import './styles/app.scss';
+import './styles/main/index.css';
 
 const App = () => {
   const { initializeAuth } = useContext(AppContext);
