@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Button, Form, FormControl } from 'react-bootstrap';
 import { BiSearch } from 'react-icons/bi';
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
@@ -20,17 +21,20 @@ const Contacts = () => {
         Authorization: 'Bearer ' + getToken(),
       },
     };
+    try {
+      const res = await api.get(url, config);
+      // const { results: payload = {} } = res?.data;
+      const { payload = {} } = res?.data;
 
-    const res = await api.get(url, config);
-    // const { results: payload = {} } = res?.data;
-    const { payload = {} } = res?.data;
-
-    dispatch({ type: 'SET_CONTACTS', payload });
+      dispatch({ type: 'SET_CONTACTS', payload });
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   useEffect(() => {
     // load all contacts when component is mounted
-    getContacts('/contact/contacts');
+    getContacts('/contact/contacts?limit=5');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,10 +59,9 @@ const Contacts = () => {
   };
 
   const showPerPageHandler = async (e) => {
-    const limit = e.target.value;
-    if (limit) {
-      getContacts(`/contact/contacts?limit=${limit}`);
-    }
+    const limit = e.target.value || 0;
+    // if limit is 0 then fetch all contacts from server
+    getContacts(`/contact/contacts?limit=${limit}`);
   };
 
   return (
@@ -123,33 +126,35 @@ const Contacts = () => {
                 <Contact {...contact} key={contact.id} index={index + 1} />
               ))
             : null}
-          {/* <tr>
-            <th scope='col'></th>
-            <th scope='col'></th>
-            <th scope='col'></th>
-            <th scope='col'>
-              <p className='float-right'>Row per page</p>
-            </th>
-            <td>
-              <select
-                className='form-select form-select-md w-25'
-                aria-label='Default select example'
-                onChange={showPerPageHandler}
-                title='Row per page'
-              >
-                <option value='1'>1</option>
-                <option value='2'>2</option>
-                <option value='3'>3</option>
-                <option value='4'>4</option>
-              </select>
-            </td>
-          </tr> */}
+          {contacts.length > 5 && (
+            <tr>
+              <th scope='col'></th>
+              <th scope='col'></th>
+              <th scope='col'></th>
+              <th scope='col'>
+                <p className='float-right pt-2'>ROW PER PAGE</p>
+              </th>
+              <td>
+                <select
+                  className='form-select form-select-md w-25 bg-primary text-white'
+                  aria-label='Default select example'
+                  onChange={showPerPageHandler}
+                  title='Row per page'
+                >
+                  <option value='5'>5</option>
+                  <option value='10'>10</option>
+                  <option value='15'>15</option>
+                  <option>All</option>
+                </select>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       {contacts.length === 0 && (
-        <tr className='text-white'>
-          <h2>No contacts available yet !! please add contacts</h2>
-        </tr>
+        <div className='text-white text-center mt-5'>
+          <h2>No contacts available yet !! please add contact</h2>
+        </div>
       )}
     </div>
   );
