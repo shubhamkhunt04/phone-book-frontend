@@ -34,7 +34,7 @@ const Contacts = () => {
 
   useEffect(() => {
     // load all contacts when component is mounted
-    getContacts('/contact/contacts?limit=5');
+    getContacts('/contact/contacts');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -126,29 +126,28 @@ const Contacts = () => {
                 <Contact {...contact} key={contact.id} index={index + 1} />
               ))
             : null}
-          {contacts.length > 5 && (
-            <tr>
-              <th scope='col'></th>
-              <th scope='col'></th>
-              <th scope='col'></th>
-              <th scope='col'>
-                <p className='float-right pt-2'>ROW PER PAGE</p>
-              </th>
-              <td>
-                <select
-                  className='form-select form-select-md w-25 bg-primary text-white'
-                  aria-label='Default select example'
-                  onChange={showPerPageHandler}
-                  title='Row per page'
-                >
-                  <option value='5'>5</option>
-                  <option value='10'>10</option>
-                  <option value='15'>15</option>
-                  <option>All</option>
-                </select>
-              </td>
-            </tr>
-          )}
+
+          <tr>
+            <th scope='col'></th>
+            <th scope='col'></th>
+            <th scope='col'></th>
+            <th scope='col'>
+              <p className='float-right pt-2'>ROW PER PAGE</p>
+            </th>
+            <td>
+              <select
+                className='form-select form-select-md w-25 bg-primary text-white'
+                aria-label='Default select example'
+                onChange={showPerPageHandler}
+                title='Row per page'
+              >
+                <option value='5'>5</option>
+                <option value='10'>10</option>
+                <option value='15'>15</option>
+                <option>All</option>
+              </select>
+            </td>
+          </tr>
         </tbody>
       </table>
       {contacts.length === 0 && (

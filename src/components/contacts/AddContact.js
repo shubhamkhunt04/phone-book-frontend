@@ -46,7 +46,7 @@ const AddContact = () => {
         toast.success(message);
         history.push(ROUTES.CONTACTS);
       } else {
-        toast.error(message);
+        toast.error(message[0] || message);
       }
     } catch (err) {
       console.log(err);
@@ -84,6 +84,8 @@ const AddContact = () => {
                 onChange={onChange}
                 value={contactData.phone}
                 required
+                maxLength={10}
+                minLength={10}
               />
             </div>
             <div className='form-group m-3'>
