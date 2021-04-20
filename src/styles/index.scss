@@ -12,6 +12,7 @@ $theme-colors: ("primary": #1A1D24,
 
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "./pages/register.scss";
+@import "./app.scss";
 
 
 body {
