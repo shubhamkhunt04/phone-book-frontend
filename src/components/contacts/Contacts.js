@@ -127,27 +127,29 @@ const Contacts = () => {
               ))
             : null}
 
-          <tr>
-            <th scope='col'></th>
-            <th scope='col'></th>
-            <th scope='col'></th>
-            <th scope='col'>
-              <p className='float-right pt-2'>ROW PER PAGE</p>
-            </th>
-            <td>
-              <select
-                className='form-select form-select-md w-25 bg-primary text-white'
-                aria-label='Default select example'
-                onChange={showPerPageHandler}
-                title='Row per page'
-              >
-                <option value='5'>5</option>
-                <option value='10'>10</option>
-                <option value='15'>15</option>
+          {contacts.length > 1 ? (
+            <tr>
+              <th scope='col'></th>
+              <th scope='col'></th>
+              <th scope='col'></th>
+              <th scope='col'>
+                <p className='float-right pt-2'>ROW PER PAGE</p>
+              </th>
+              <td>
+                <select
+                  className='form-select form-select-md w-25 bg-primary text-white'
+                  aria-label='Default select example'
+                  onChange={showPerPageHandler}
+                  title='Row per page'
+                >
+                  <option value='5'>5</option>
+                  <option value='10'>10</option>
+                  <option value='15'>15</option>
                 <option>All</option>
-              </select>
-            </td>
-          </tr>
+                </select>
+              </td>
+            </tr>
+          ) : null}
         </tbody>
       </table>
       {contacts.length === 0 && (
