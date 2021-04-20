@@ -1,6 +1,5 @@
 import Navbar from './components/navbar/Navbar';
 import Contacts from './components/contacts/Contacts';
-import './styles/app.scss';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AddContact from './components/contacts/AddContact';
 import EditContact from './components/contacts/EditContact';
@@ -10,6 +9,7 @@ import { AppContext } from './AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Footer from './components/footer/Footer';
+import './styles/app.scss';
 
 const App = () => {
   const { initializeAuth } = useContext(AppContext);
