@@ -9,6 +9,7 @@ import { useContext, useEffect } from 'react';
 import { AppContext } from './AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   const { initializeAuth } = useContext(AppContext);
@@ -18,10 +19,9 @@ const App = () => {
     initializeAuth();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Router>
-        <ToastContainer />
+      <ToastContainer />
       {/* <div className='App'>
           <header className='App-header'> */}
       <Navbar />
@@ -37,6 +37,7 @@ const App = () => {
             </div>
           </header>
         </div> */}
+      <Footer />
     </Router>
   );
 };
