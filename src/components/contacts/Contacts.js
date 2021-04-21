@@ -24,7 +24,6 @@ const Contacts = () => {
     };
     try {
       const res = await api.get(url, config);
-      // const { results: payload = {} } = res?.data;
       const { payload = {} } = res?.data;
 
       dispatch({ type: 'SET_CONTACTS', payload });
@@ -91,7 +90,6 @@ const Contacts = () => {
             />
             <BiSearch size='25px' className='search-icon' />
           </div>
-          {/* <input type='text' name='search' onChange={searchHandler} className='btn btn-primary' placeholder="Search..."/> */}
         </div>
         <Button
           className='btn btn-light float-right mb-2'
@@ -105,14 +103,6 @@ const Contacts = () => {
         <thead>
           <tr>
             <th scope='col'>
-              {/* <div className='custom-control custom-checkbox'>
-                <input
-                  type='checkbox'
-                  className='custom-control-input'
-                  id='contactCheckBox'
-                />
-                <label htmlFor='contactCheckBox'></label>
-              </div> */}
               No.
             </th>
             <th scope='col'>Name</th>
