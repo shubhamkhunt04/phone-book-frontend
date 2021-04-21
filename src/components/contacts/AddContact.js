@@ -1,14 +1,13 @@
-import axios from 'axios';
-import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
 
 const AddContact = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
 
   const history = useHistory();
 
@@ -29,13 +28,6 @@ const AddContact = () => {
       const res = await api.post('/contact/addcontact', contactData);
       const { payload = {}, status, message } = res?.data;
       dispatch({ type: 'SET_CONTACTS', payload });
-      // const { token = '' } = payload;
-      // if (token) {
-      //   initializeAuth(token, payload);
-      // }
-      console.log('res', res.data);
-
-      // dispatch(addContact({ id: nanoid(8), ...contactData }));
 
       setContactData({
         name: '',

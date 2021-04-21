@@ -1,15 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Avatar from 'react-avatar';
 import { Button } from 'react-bootstrap';
-import {
-  AiOutlineDelete,
-  AiTwotoneDelete,
-  FaEdit,
-  FaRegEdit,
-  MdDelete,
-} from 'react-icons/all';
+import { AiOutlineDelete, FaRegEdit } from 'react-icons/all';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 

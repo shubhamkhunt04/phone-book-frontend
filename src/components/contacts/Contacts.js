@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, Form, FormControl } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { BiSearch } from 'react-icons/bi';
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
+
 import { AppContext } from '../../AppContext';
 import api from '../../common/api';
 import { ROUTES } from '../../common/constant';
@@ -73,9 +74,9 @@ const Contacts = () => {
               className='form-select form-select-md w-auto bg-primary text-white'
               aria-label='Default select example'
               onChange={selectMenuHandler}
-              title='Sort Contact number'
+              title='Sort Contacts'
             >
-              <option selected>Sort Contact Number</option>
+              <option selected>Sort Contacts</option>
               <option value='asc'>Ascending order</option>
               <option value='desc'>Descending order</option>
             </select>
@@ -145,7 +146,7 @@ const Contacts = () => {
                   <option value='5'>5</option>
                   <option value='10'>10</option>
                   <option value='15'>15</option>
-                <option>All</option>
+                  <option>All</option>
                 </select>
               </td>
             </tr>
