@@ -14,10 +14,30 @@
 
 <!-- ABOUT THE PROJECT -->
 
-# About The Project
+# Phone Book
 
 It is Web App used to easily consolidate all your contacts in one secure, online location. The phone book is stored user information
 on the cloud so users can create, update, delete, sort, search and view contacts from any device, anywhere, 24/7.
+
+## Features
+
+- Create, Read, update and delete contact.
+- Search contacts by name
+- Sort contacts by name(ascending order and descending order)
+- Responsive
+- JWT based authentication
+- Register and Login
+
+## Live Demo
+
+[Click Here](https://phonebook08.netlify.app) to play around.
+
+## Guest Credentials
+
+```
+Email: testuser@gmail.com
+Password: test@123
+```
 
 # Built With
 
